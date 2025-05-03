@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>صفحه معلم</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Tahoma;
+      background-image: url('background.jpg');
+      background-size: cover;
+      background-position: center;
+      direction: rtl;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      font-family: 'IranNastaliq', cursive;
+      font-size: 2rem;
+      text-align: center;
+      color: #fff;
+      text-shadow: 2px 2px 4px #000;
+      margin-top: 1rem;
+    }
+
+    .scroll-container {
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+      padding: 10px 20px;
+      margin: 20px auto;
+      max-width: 90vw;
+      height: 140px;
+    }
+
+    .scroll-container::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .scroll-container::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 3px;
+    }
+
+    .thumb {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      cursor: pointer;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .thumb:hover {
+      transform: scale(1.05);
+    }
+
+    #videoPlayer {
+      display: none;
+      margin: 0 auto;
+      max-width: 90vw;
+      max-height: 60vh;
+      border-radius: 16px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    }
+
+    .music-button {
+      position: fixed;
+      left: 20px;
+      bottom: 20px;
+      background-color: #4c8ed9;
+      color: white;
+      font-family: 'IranNastaliq', cursive;
+      padding: 12px 20px;
+      border-radius: 30px;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .music-button:hover {
+      background-color: #3975c1;
+      transform: scale(1.05);
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>این گل‌ها تقدیم به بهترین معلم دنیا</h1>
+
+  <div class="scroll-container" id="thumbnailContainer">
+    <!-- تصاویر بندانگشتی -->
+  </div>
+
+  <video id="videoPlayer" controls></video>
+  <audio id="bgMusic" src="music.mp3" loop></audio>
+  <button class="music-button" onclick="toggleMusic()">آوای دل</button>
+
+  <script>
+    const videos = 21;
+    const container = document.getElementById("thumbnailContainer");
+    const player = document.getElementById("videoPlayer");
+    const music = document.getElementById("bgMusic");
+
+    for (let i = 1; i <= videos; i++) {
+      const img = document.createElement("img");
+      img.src = `images/${i}.jpg`;
+      img.className = "thumb";
+      img.onclick = () => {
+        music.pause();
+        player.src = `videos/${i}.mp4`;
+        player.style.display = "block";
+        player.play();
+      };
+      container.appendChild(img);
+    }
+
+    function toggleMusic() {
+      if (music.paused) {
+        player.pause();
+        music.play();
+      } else {
+        music.pause();
+      }
+    }
+  </script>
+</body>
+</html>
